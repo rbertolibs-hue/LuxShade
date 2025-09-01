@@ -1,93 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LuxShade</title>
-  <link rel="manifest" href="manifest.json">
-  <style>
-    :root { --primary:#0b3d91; --bg:#f6f8fc; --text:#111; }
-    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);}
-    header{background:var(--primary);color:#fff;padding:16px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0}
-    header img{width:36px;height:36px;border-radius:8px}
-    header h1{font-size:20px;margin:0}
-    main{max-width:860px;margin:24px auto;padding:0 16px;display:grid;gap:16px}
-    .card{background:#fff;border-radius:14px;box-shadow:0 6px 22px rgba(0,0,0,.08);padding:16px 18px}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    button{background:#fff;border:1px solid #d7dce6;border-radius:10px;padding:10px 14px;cursor:pointer}
-    button.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
-    .slider{width:100%}
-    .status{font-family:ui-monospace, SFMono-Regular, Menlo, monospace}
-    footer{color:#666;font-size:12px;text-align:center;padding:24px}
-    .hint{font-size:13px;color:#555}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:700px){.grid2{grid-template-columns:1fr}}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RB App</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#111111"/>
+  <link rel="icon" href="./icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<header>
-  <img src="icons/icon-192.png" alt="LuxShade logo"><h1>LuxShade™ – Electrochromic Control</h1>
-</header>
-<main>
-  <section class="card grid2">
-    <div>
-      <h3>Mode</h3>
-      <div class="row">
-        <button id="btnAuto" class="primary">AUTO</button>
-        <button id="btnManual">MANUAL</button>
-        <button id="btnPrivacy">PRIVACY</button>
-      </div>
-      <p class="hint">Switch between automatic control, manual control and privacy mode.</p>
-    </div>
-    <div>
-      <h3>Device</h3>
-      <div class="row">
-        <input id="espIp" placeholder="ESP32 IP (e.g., 192.168.1.50)" style="flex:1;padding:10px;border-radius:10px;border:1px solid #d7dce6">
-        <button id="btnSaveIp">Save IP</button>
-      </div>
-      <p class="hint">Your phone/PC must be on the same Wi‑Fi network as the ESP32.</p>
-    </div>
-  </section>
+  <header>
+    <h1>RB App</h1>
+    <button id="installBtn" hidden>Installa l’app</button>
+  </header>
+  <main>
+    <section class="card">
+      <h2>Benvenuto!</h2>
+      <p>Questa è una PWA pronta per essere aggiunta alla schermata Home.</p>
+      <ul>
+        <li>Funziona offline (cache di base)</li>
+        <li>È “installabile” con Chrome/Edge/Brave su Android e con Safari su iOS</li>
+        <li>Struttura pulita per estendere rapidamente funzionalità</li>
+      </ul>
+      <p class="muted">Modifica i file <code>app.js</code> e <code>styles.css</code> per personalizzare.</p>
+    </section>
 
-  <section class="card">
-    <h3>Manual Tint</h3>
-    <input id="tint" class="slider" type="range" min="0" max="100" value="0">
-    <div class="row">
-      <span>Tint: <b><span id="tVal">0</span>%</b></span>
-      <span id="status" class="status">Status: --</span>
-    </div>
-  </section>
-
-  <section class="card grid2">
-    <div>
-      <h3>Profiles</h3>
-      <div class="row">
-        <button id="btnProfile1">Driver</button>
-        <button id="btnProfile2">Passenger</button>
-        <button id="btnSaveProfile">Save current</button>
-      </div>
-      <p class="hint">Save preferred luminance/tint boundaries per user.</p>
-    </div>
-    <div>
-      <h3>Failsafe / Diagnostics</h3>
-      <div class="row">
-        <button id="btnFailsafe">Trigger FAILSAFE</button>
-        <button id="btnClear">Clear to 0%</button>
-      </div>
-      <p class="hint">For testing: ensure legal VLT envelope and ramp to clear on fault.</p>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div>© 2025 Roberto Bertoli – LuxShade™ • PWA Demo</div>
-</footer>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', ()=> navigator.serviceWorker.register('service-worker.js'));
-  }
-</script>
-<script src="app.js"></script>
+    <section class="card">
+      <h3>Demo</h3>
+      <button id="counterBtn">Tocchi: <span id="count">0</span></button>
+    </section>
+  </main>
+  <footer>
+    <small>© 2025 RB</small>
+  </footer>
+  <script src="./app.js"></script>
 </body>
 </html>
